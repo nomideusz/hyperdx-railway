@@ -47,6 +47,8 @@ Two services get public domains here, which is unusual and deliberate: the app's
 - **Unauthenticated ingest is rejected.** The collector answers `401` without a valid ingestion key, so its public domain is safe to hand out to your own services.
 - **MongoDB runs with `--ipv6`.** Railway's private network is IPv6-only and `--bind_ip_all` alone binds `0.0.0.0`, so without that flag the app cannot reach the database at all. Don't remove it.
 - **The collector's `PORT` pins the routed port.** Its image exposes five ports, and `PORT=4318` is what tells Railway which one the domain belongs to.
+- **The collector deliberately has no healthcheck, and adding one will break your deploys.** Railway probes the routed port and requires a 2xx; port 4318 is the OTLP receiver, which answers `401` to every path including `/`. The collector's real health endpoint is the `health_check` extension on `13133`, and Railway has no way to probe a port other than the routed one — there is no `healthcheckPort`. Setting `healthcheckPath` here makes every deploy sit until `RAILWAY_HEALTHCHECK_TIMEOUT_SEC` expires and then fail, on a collector that is working perfectly.
+- **ClickHouse and MongoDB have no healthcheck either, and one would be decorative.** Railway only runs healthchecks against services with a public domain; on an internal-only service the setting is accepted and never executed.
 - **Give ClickHouse room.** It is the memory-hungry service here; if queries get killed or ingest stalls, that is the service to scale.
 
 ## Why Deploy HyperDX on Railway?

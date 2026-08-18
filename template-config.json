@@ -43,7 +43,7 @@
       "variables": {
         "MONGO_INITDB_ROOT_USERNAME": {
           "isOptional": false,
-          "description": "Metadata database user. Must match the app's MONGO_URI — don't change.",
+          "description": "Metadata database user. Must match the app's MONGO_URI \u2014 don't change.",
           "defaultValue": "hyperdx"
         },
         "MONGO_INITDB_ROOT_PASSWORD": {
@@ -63,7 +63,7 @@
       "name": "app",
       "deploy": {
         "startCommand": null,
-        "healthcheckPath": "/",
+        "healthcheckPath": "/api/installation",
         "restartPolicyType": "ON_FAILURE",
         "restartPolicyMaxRetries": 10
       },
@@ -74,7 +74,7 @@
       "variables": {
         "PORT": {
           "isOptional": false,
-          "description": "UI port Railway routes to. Must match HYPERDX_APP_PORT — don't change.",
+          "description": "UI port Railway routes to. Must match HYPERDX_APP_PORT \u2014 don't change.",
           "defaultValue": "8080"
         },
         "HYPERDX_APP_PORT": {
@@ -109,7 +109,7 @@
         },
         "MONGO_URI": {
           "isOptional": false,
-          "description": "Metadata database connection string. Wired automatically — don't change.",
+          "description": "Metadata database connection string. Wired automatically \u2014 don't change.",
           "defaultValue": "mongodb://hyperdx:${{mongo.MONGO_INITDB_ROOT_PASSWORD}}@${{mongo.RAILWAY_PRIVATE_DOMAIN}}:27017/hyperdx?authSource=admin"
         },
         "EXPRESS_SESSION_SECRET": {
@@ -119,7 +119,7 @@
         },
         "DEFAULT_CONNECTIONS": {
           "isOptional": false,
-          "description": "The bundled ClickHouse, pre-selected on first login. Wired automatically — don't change.",
+          "description": "The bundled ClickHouse, pre-selected on first login. Wired automatically \u2014 don't change.",
           "defaultValue": "[{\"name\":\"Local ClickHouse\",\"host\":\"http://${{clickhouse.RAILWAY_PRIVATE_DOMAIN}}:8123\",\"username\":\"hyperdx\",\"password\":\"${{clickhouse.CLICKHOUSE_PASSWORD}}\"}]"
         },
         "USAGE_STATS_ENABLED": {
@@ -165,22 +165,22 @@
         },
         "OPAMP_SERVER_URL": {
           "isOptional": false,
-          "description": "Where the collector fetches its pipeline config. Wired automatically — don't change.",
+          "description": "Where the collector fetches its pipeline config. Wired automatically \u2014 don't change.",
           "defaultValue": "http://${{app.RAILWAY_PRIVATE_DOMAIN}}:4320"
         },
         "CLICKHOUSE_ENDPOINT": {
           "isOptional": false,
-          "description": "ClickHouse native endpoint. Wired automatically — don't change.",
+          "description": "ClickHouse native endpoint. Wired automatically \u2014 don't change.",
           "defaultValue": "tcp://${{clickhouse.RAILWAY_PRIVATE_DOMAIN}}:9000?dial_timeout=10s"
         },
         "CLICKHOUSE_USER": {
           "isOptional": false,
-          "description": "ClickHouse user. Must match the clickhouse service — don't change.",
+          "description": "ClickHouse user. Must match the clickhouse service \u2014 don't change.",
           "defaultValue": "hyperdx"
         },
         "CLICKHOUSE_PASSWORD": {
           "isOptional": false,
-          "description": "ClickHouse password. Wired automatically — don't change.",
+          "description": "ClickHouse password. Wired automatically \u2014 don't change.",
           "defaultValue": "${{clickhouse.CLICKHOUSE_PASSWORD}}"
         },
         "HYPERDX_LOG_LEVEL": {
