@@ -1,0 +1,6 @@
+{
+  "name": "HyperDX",
+  "description": "ClickHouse observability: logs, traces, metrics, session replay.",
+  "category": "Observability",
+  "image": "https://devicons.railway.app/i/hyperdx.svg"
+}
