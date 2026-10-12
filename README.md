@@ -1,6 +1,6 @@
 # Deploy and Host HyperDX on Railway
 
-[![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/new/template/hyperdx?utm_medium=integration&utm_source=button&utm_campaign=hyperdx)
+[![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/new/template/hyperdx?referralCode=sLjDXb&utm_medium=integration&utm_source=button&utm_campaign=hyperdx)
 
 [HyperDX](https://hyperdx.io/) — the open-source core of ClickHouse's ClickStack — unifies logs, traces, metrics, session replay, and errors over ClickHouse. It correlates a browser session with the exact backend trace and the logs around it, so a bug report turns into a root cause without hopping between four tools.
 
