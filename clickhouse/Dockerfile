@@ -5,5 +5,8 @@
 # already ships <listen_host>::</listen_host> for the IPv6 private network.
 FROM clickhouse/clickhouse-server:25.3
 
+# Railway hosts run transparent huge pages "always": jemalloc frees 4K pages
+# inside 2 MB huge pages that stay charged, so idle ClickHouse creeps ~25 MB/min.
 ENV CLICKHOUSE_DB=default \
-    CLICKHOUSE_USER=hyperdx
+    CLICKHOUSE_USER=hyperdx \
+    MALLOC_CONF=thp:never
