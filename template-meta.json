@@ -1,7 +1,8 @@
 {
   "id": "9f66026b-d505-4f90-b237-98979a33a3fc",
+  "published": true,
   "name": "HyperDX",
   "description": "ClickHouse observability: logs, traces, metrics, session replay.",
-  "category": "Observability",
-  "image": "https://devicons.railway.app/i/hyperdx.svg"
+  "image": "https://raw.githubusercontent.com/hyperdxio/hyperdx/main/packages/app/public/favicons/hyperdx/favicon.svg",
+  "category": "Observability"
 }

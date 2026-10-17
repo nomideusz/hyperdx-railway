@@ -1,65 +1,8 @@
 {
   "buckets": {},
   "services": {
-    "a0c7928c-c1b8-4dc6-bbe7-c44ac129017f": {
-      "icon": "https://devicons.railway.app/i/clickhouse.svg",
-      "name": "clickhouse",
-      "deploy": {
-        "startCommand": null,
-        "healthcheckPath": null,
-        "restartPolicyType": "ON_FAILURE",
-        "restartPolicyMaxRetries": 10
-      },
-      "source": {
-        "repo": "https://github.com/nomideusz/hyperdx-railway",
-        "rootDirectory": "/clickhouse"
-      },
-      "variables": {
-        "CLICKHOUSE_PASSWORD": {
-          "isOptional": false,
-          "description": "Auto-generated telemetry database password.",
-          "defaultValue": "${{secret(32)}}"
-        }
-      },
-      "volumeMounts": {
-        "a0c7928c-c1b8-4dc6-bbe7-c44ac129017f": {
-          "mountPath": "/var/lib/clickhouse"
-        }
-      }
-    },
-    "6a0733d1-8a03-4b8c-a80a-d5db71540147": {
-      "icon": "https://devicons.railway.app/i/mongodb.svg",
-      "name": "mongo",
-      "deploy": {
-        "startCommand": null,
-        "healthcheckPath": null,
-        "restartPolicyType": "ON_FAILURE",
-        "restartPolicyMaxRetries": 10
-      },
-      "source": {
-        "repo": "https://github.com/nomideusz/hyperdx-railway",
-        "rootDirectory": "/mongo"
-      },
-      "variables": {
-        "MONGO_INITDB_ROOT_USERNAME": {
-          "isOptional": false,
-          "description": "Metadata database user. Must match the app's MONGO_URI \u2014 don't change.",
-          "defaultValue": "hyperdx"
-        },
-        "MONGO_INITDB_ROOT_PASSWORD": {
-          "isOptional": false,
-          "description": "Auto-generated metadata database password.",
-          "defaultValue": "${{secret(32)}}"
-        }
-      },
-      "volumeMounts": {
-        "6a0733d1-8a03-4b8c-a80a-d5db71540147": {
-          "mountPath": "/data/db"
-        }
-      }
-    },
     "2bff5e6f-3009-4c7f-8f95-11f5853caddf": {
-      "icon": "https://devicons.railway.app/i/hyperdx.svg",
+      "icon": "https://avatars.githubusercontent.com/u/130113031?v=4",
       "name": "app",
       "deploy": {
         "startCommand": null,
@@ -77,15 +20,10 @@
           "description": "UI port Railway routes to. Must match HYPERDX_APP_PORT \u2014 don't change.",
           "defaultValue": "8080"
         },
-        "HYPERDX_APP_PORT": {
+        "MONGO_URI": {
           "isOptional": false,
-          "description": "Next.js UI port inside the container. Don't change.",
-          "defaultValue": "8080"
-        },
-        "HYPERDX_API_PORT": {
-          "isOptional": false,
-          "description": "API port inside the container, reached over loopback only. Don't change.",
-          "defaultValue": "8000"
+          "description": "Metadata database connection string. Wired automatically \u2014 don't change.",
+          "defaultValue": "mongodb://hyperdx:${{mongo.MONGO_INITDB_ROOT_PASSWORD}}@${{mongo.RAILWAY_PRIVATE_DOMAIN}}:27017/hyperdx?authSource=admin"
         },
         "OPAMP_PORT": {
           "isOptional": false,
@@ -107,15 +45,20 @@
           "description": "Public base URL, wired to your Railway domain. Don't change.",
           "defaultValue": "https://${{RAILWAY_PUBLIC_DOMAIN}}"
         },
-        "MONGO_URI": {
+        "HYPERDX_API_PORT": {
           "isOptional": false,
-          "description": "Metadata database connection string. Wired automatically \u2014 don't change.",
-          "defaultValue": "mongodb://hyperdx:${{mongo.MONGO_INITDB_ROOT_PASSWORD}}@${{mongo.RAILWAY_PRIVATE_DOMAIN}}:27017/hyperdx?authSource=admin"
+          "description": "API port inside the container, reached over loopback only. Don't change.",
+          "defaultValue": "8000"
         },
-        "EXPRESS_SESSION_SECRET": {
+        "HYPERDX_APP_PORT": {
           "isOptional": false,
-          "description": "Auto-generated key for signing login sessions.",
-          "defaultValue": "${{secret(32)}}"
+          "description": "Next.js UI port inside the container. Don't change.",
+          "defaultValue": "8080"
+        },
+        "HYPERDX_LOG_LEVEL": {
+          "isOptional": true,
+          "description": "Log verbosity: debug, info, warn, error.",
+          "defaultValue": "info"
         },
         "DEFAULT_CONNECTIONS": {
           "isOptional": false,
@@ -127,10 +70,10 @@
           "description": "Anonymous usage reporting to HyperDX. Off by default.",
           "defaultValue": "false"
         },
-        "HYPERDX_LOG_LEVEL": {
-          "isOptional": true,
-          "description": "Log verbosity: debug, info, warn, error.",
-          "defaultValue": "info"
+        "EXPRESS_SESSION_SECRET": {
+          "isOptional": false,
+          "description": "Auto-generated key for signing login sessions.",
+          "defaultValue": "${{secret(32)}}"
         },
         "RAILWAY_HEALTHCHECK_TIMEOUT_SEC": {
           "isOptional": false,
@@ -163,35 +106,92 @@
           "description": "OTLP/HTTP port Railway routes to. The image exposes five ports; this pins the right one. Don't change.",
           "defaultValue": "4318"
         },
+        "CLICKHOUSE_USER": {
+          "isOptional": false,
+          "description": "ClickHouse user. Must match the clickhouse service \u2014 don't change.",
+          "defaultValue": "hyperdx"
+        },
         "OPAMP_SERVER_URL": {
           "isOptional": false,
           "description": "Where the collector fetches its pipeline config. Wired automatically \u2014 don't change.",
           "defaultValue": "http://${{app.RAILWAY_PRIVATE_DOMAIN}}:4320"
+        },
+        "HYPERDX_LOG_LEVEL": {
+          "isOptional": true,
+          "description": "Log verbosity: debug, info, warn, error.",
+          "defaultValue": "info"
         },
         "CLICKHOUSE_ENDPOINT": {
           "isOptional": false,
           "description": "ClickHouse native endpoint. Wired automatically \u2014 don't change.",
           "defaultValue": "tcp://${{clickhouse.RAILWAY_PRIVATE_DOMAIN}}:9000?dial_timeout=10s"
         },
-        "CLICKHOUSE_USER": {
-          "isOptional": false,
-          "description": "ClickHouse user. Must match the clickhouse service \u2014 don't change.",
-          "defaultValue": "hyperdx"
-        },
         "CLICKHOUSE_PASSWORD": {
           "isOptional": false,
           "description": "ClickHouse password. Wired automatically \u2014 don't change.",
           "defaultValue": "${{clickhouse.CLICKHOUSE_PASSWORD}}"
-        },
-        "HYPERDX_LOG_LEVEL": {
-          "isOptional": true,
-          "description": "Log verbosity: debug, info, warn, error.",
-          "defaultValue": "info"
         }
       },
       "networking": {
         "serviceDomains": {
           "<hasDomain>": {}
+        }
+      }
+    },
+    "6a0733d1-8a03-4b8c-a80a-d5db71540147": {
+      "icon": "https://devicons.railway.app/i/mongodb.svg",
+      "name": "mongo",
+      "deploy": {
+        "startCommand": null,
+        "healthcheckPath": null,
+        "restartPolicyType": "ON_FAILURE",
+        "restartPolicyMaxRetries": 10
+      },
+      "source": {
+        "repo": "https://github.com/nomideusz/hyperdx-railway",
+        "rootDirectory": "/mongo"
+      },
+      "variables": {
+        "MONGO_INITDB_ROOT_PASSWORD": {
+          "isOptional": false,
+          "description": "Auto-generated metadata database password.",
+          "defaultValue": "${{secret(32)}}"
+        },
+        "MONGO_INITDB_ROOT_USERNAME": {
+          "isOptional": false,
+          "description": "Metadata database user. Must match the app's MONGO_URI \u2014 don't change.",
+          "defaultValue": "hyperdx"
+        }
+      },
+      "volumeMounts": {
+        "6a0733d1-8a03-4b8c-a80a-d5db71540147": {
+          "mountPath": "/data/db"
+        }
+      }
+    },
+    "a0c7928c-c1b8-4dc6-bbe7-c44ac129017f": {
+      "icon": "https://devicons.railway.app/i/clickhouse.svg",
+      "name": "clickhouse",
+      "deploy": {
+        "startCommand": null,
+        "healthcheckPath": null,
+        "restartPolicyType": "ON_FAILURE",
+        "restartPolicyMaxRetries": 10
+      },
+      "source": {
+        "repo": "https://github.com/nomideusz/hyperdx-railway",
+        "rootDirectory": "/clickhouse"
+      },
+      "variables": {
+        "CLICKHOUSE_PASSWORD": {
+          "isOptional": false,
+          "description": "Auto-generated telemetry database password.",
+          "defaultValue": "${{secret(32)}}"
+        }
+      },
+      "volumeMounts": {
+        "a0c7928c-c1b8-4dc6-bbe7-c44ac129017f": {
+          "mountPath": "/var/lib/clickhouse"
         }
       }
     }

@@ -34,7 +34,7 @@ Two services get public domains here, which is unusual and deliberate: the app's
 
 ### Implementation Details
 
-**Four services from one repo, each a thin Dockerfile over an official image: `hyperdx/hyperdx:2.35.0`, `hyperdx/hyperdx-otel-collector:2.35.0`, stock ClickHouse, and stock MongoDB.**
+**Four services from one repo, each a thin Dockerfile over an official image: `hyperdx/hyperdx:2.41.0`, `hyperdx/hyperdx-otel-collector:2.41.0`, stock ClickHouse, and stock MongoDB.**
 
 1. Deploy, then open the `app` service's domain and register. The first account created becomes the owner and creates the team; there is no seeded admin.
 2. The bundled ClickHouse is pre-wired as a connection and the four sources (Logs, Traces, Metrics, Sessions) are pre-defined, so there is nothing to configure after signup.

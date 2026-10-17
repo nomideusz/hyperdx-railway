@@ -3,7 +3,7 @@
 # container. Only the UI port needs a Railway domain; the UI proxies to the
 # API over 127.0.0.1 (SERVER_URL), and the collector reaches OpAMP over the
 # private network.
-FROM hyperdx/hyperdx:2.35.0
+FROM hyperdx/hyperdx:2.41.0
 
 # The four source definitions (logs, traces, metrics, sessions) that map the
 # collector's legacy otel_* tables into the UI. Constant across every deploy,
