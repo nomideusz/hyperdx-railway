@@ -29,7 +29,7 @@ Two services get public domains here, which is unusual and deliberate: the app's
 
 - [HyperDX documentation](https://www.hyperdx.io/docs)
 - [HyperDX source](https://github.com/hyperdxio/hyperdx)
-- [Template source on GitHub](https://github.com/nomideusz/hyperdx-railway)
+- [Template source on GitHub](https://github.com/two-workspaces/hyperdx)
 - [ClickStack docs at ClickHouse](https://clickhouse.com/docs/use-cases/observability/clickstack)
 
 ### Implementation Details
