@@ -3,7 +3,7 @@
 # but that file is their local-dev one (10GB memory cap, passwordless default
 # user); the stock image plus a password is the right shape for Railway and
 # already ships <listen_host>::</listen_host> for the IPv6 private network.
-FROM clickhouse/clickhouse-server:25.3
+FROM clickhouse/clickhouse-server:26.8
 
 # Logs to the console instead of 10 x 1 GB files, and ClickHouse's own
 # telemetry tables (trace_log, metric_log, ...) off: they write every few

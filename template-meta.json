@@ -3,6 +3,6 @@
   "published": true,
   "name": "HyperDX",
   "description": "ClickHouse observability: logs, traces, metrics, session replay.",
-  "image": "https://raw.githubusercontent.com/hyperdxio/hyperdx/main/packages/app/public/favicons/hyperdx/favicon.svg",
+  "image": "https://github.com/ClickHouse/ClickStack/raw/main/packages/app/public/favicons/clickstack/favicon.svg",
   "category": "Observability"
 }
